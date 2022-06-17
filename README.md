@@ -7,7 +7,6 @@
 - [H5中实现拖拽技术](https://blog.csdn.net/nihaio25/article/details/120288261)
 
 2.源码阅读
-- [录屏学习] vuex 源码
 
 
 3.leecode刷题
@@ -15,3 +14,5 @@
 
 4.项目代码 
 - [x] 后端项目排版
+
+
