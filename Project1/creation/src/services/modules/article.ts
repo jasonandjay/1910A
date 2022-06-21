@@ -1,4 +1,5 @@
 import { request } from 'umi';
+
 // 获取文章列表
 export function getArticleList(page: number = 1){
   return request('/api/article', {
@@ -9,4 +10,9 @@ export function getArticleList(page: number = 1){
       status: 'publish'
     },
   })
+}
+
+// 获取文章推荐列表
+export function getArticleRecommend(){
+  return request('/api/article/recommend')
 }

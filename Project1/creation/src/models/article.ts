@@ -1,9 +1,10 @@
 import { Effect, Reducer } from 'umi';
-import { getArticleList } from '@/services';
+import { getArticleList, getArticleRecommend } from '@/services';
 import { IArticleItem } from '@/types';
 
 export interface ArticleModelState {
   articleList: IArticleItem [];
+  recommedArticleList: IArticleItem [];
   articleLength: number;
 }
 
@@ -12,6 +13,7 @@ export interface ArticleModelType {
   state: ArticleModelState;
   effects: {
     getArticleList: Effect;
+    getArticleRecommend: Effect;
   };
   reducers: {
     save: Reducer<ArticleModelState>;
@@ -25,6 +27,7 @@ const ArticleModel: ArticleModelType = {
   // 定义的状态
   state: {
     articleList: [],
+    recommedArticleList: [],
     articleLength: 0,
   },
 
@@ -42,6 +45,17 @@ const ArticleModel: ArticleModelType = {
         })
       }
     },
+    *getArticleRecommend({ payload }, {call, put}){
+      const result = yield call(getArticleRecommend);
+      if (result.data){
+        yield put({
+          type: 'save',
+          payload: {
+            recommedArticleList: result.data
+          }
+        })
+      }
+    }
   },
 
   // 同步修改state的操作

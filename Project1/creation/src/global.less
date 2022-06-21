@@ -1,0 +1,51 @@
+@import './less/theme.less';
+
+img{
+  width: 100%;
+}
+.wrapper{
+  height: 100vh;
+  min-height: 100vh;
+  header{
+    height: 64px;
+    width: 100%;
+    background: var(--bg);
+  }
+  &>main{
+    min-height: calc(100% - 64px);
+    background: var(--bg-body);
+    display: flex;
+    flex-direction: column;
+  }
+}
+.container{
+  margin-left: auto;
+  margin-right: auto;
+  background: #fff;
+}
+
+@media (max-width: 768px) {
+  .container {
+      width:100%;
+      padding-right: 15px;
+      padding-left: 15px
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+      width:768px
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+      width:970px
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+      width:1140px
+  }
+}
