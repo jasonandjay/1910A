@@ -1,3 +1,18 @@
+//啥作用域不加等于local
 .title {
   background: rgb(121, 242, 157);
+}
+
+:global{
+  // 想要覆盖三方库的样式
+  .title3 {
+    background: rgb(121, 242, 157);
+  }
+}
+
+:local{
+  // 局部样式，启用css module
+  .title2 {
+    background: rgb(121, 242, 157);
+  }
 }

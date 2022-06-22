@@ -29,7 +29,7 @@
     /**
      * generator函数第一次执行返回的是一个执行器，并不具体执行函数体
      * 调用next方法执行函数体遇到yield或者return停下，返回{value: yield表达式的3，done：表示是否执行完成}
-     * yield表达式的执行结果依赖于下一次next传入的值
+     * yield表达式的执行结果依赖于下一次next传入的值： const result = yield ajax();
      * 封装generator函数自动执行器
      * async...await是generator函数的语法糖
      */ 
