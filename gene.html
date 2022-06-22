@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generator函数</title>
+</head>
+<body>
+  <script>
+    function timeout(ms){
+      return new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+          resolve(ms);
+        }, ms);
+      })
+    }
+    function * gene(){
+      let result1 = yield 1;
+      console.log('result1...', result1);
+      let result2 = yield 2;
+      console.log('result2...', result2);
+      let result3 = yield 3;
+      console.log('result3...', result3);
+      let result4 = yield timeout(3000);
+      console.log('result4...', result4);
+      return 5;
+    }
+    /**
+     * generator函数第一次执行返回的是一个执行器，并不具体执行函数体
+     * 调用next方法执行函数体遇到yield或者return停下，返回{value: yield表达式的3，done：表示是否执行完成}
+     * yield表达式的执行结果依赖于下一次next传入的值
+     * 封装generator函数自动执行器
+     * async...await是generator函数的语法糖
+     */ 
+    function co(gene){
+      const g = gene();
+      function run(preValue){
+        let {value, done} = g.next(preValue);
+        if (!done){
+          if (typeof value.then === 'function' && typeof value.catch === 'function'){
+            value.then(res=>{
+              run(res);
+            })
+          }else{
+            run(value);
+          }
+        }
+      }
+      run();
+    }
+    co(gene);
+  </script>
+</body>
+</html>
