@@ -1,11 +1,12 @@
 import { Effect, Reducer } from 'umi';
-import { getArticleList, getArticleRecommend } from '@/services';
-import { IArticleItem } from '@/types';
+import { getArticleDetail, getArticleList, getArticleRecommend } from '@/services';
+import { IArticleDetail, IArticleItem } from '@/types';
 
 export interface ArticleModelState {
   articleList: IArticleItem [];
   recommedArticleList: IArticleItem [];
   articleLength: number;
+  articleDetail: IArticleDetail
 }
 
 export interface ArticleModelType {
@@ -14,6 +15,7 @@ export interface ArticleModelType {
   effects: {
     getArticleList: Effect;
     getArticleRecommend: Effect;
+    getArticleDetail: Effect;
   };
   reducers: {
     save: Reducer<ArticleModelState>;
@@ -29,6 +31,7 @@ const ArticleModel: ArticleModelType = {
     articleList: [],
     recommedArticleList: [],
     articleLength: 0,
+    articleDetail: {} as IArticleDetail
   },
 
   // 副作用，对应的异步操作，常指网络请求
@@ -41,6 +44,17 @@ const ArticleModel: ArticleModelType = {
           payload: {
             articleList: result.data[0],
             articleLength: result.data[1]
+          }
+        })
+      }
+    },
+    *getArticleDetail({ payload }, { call, put}) {
+      const result = yield call(getArticleDetail, payload);
+      if (result.data){
+        yield put({
+          type: 'save',
+          payload: {
+            articleDetail: result.data
           }
         })
       }

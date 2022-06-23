@@ -1,4 +1,4 @@
-import {useDispatch, useSelector, ArticleModelState} from 'umi';
+import {useDispatch, useSelector, ArticleModelState, NavLink} from 'umi';
 import {useEffect} from 'react';
 // css module的使用方式
 import styles from './index.less';
@@ -23,11 +23,11 @@ export default function IndexPage() {
       {/* <h1 className="title">Page index</h1> */}
 
       {articleList.map(item=>{
-        return <div key={item.id}>
+        return <NavLink to={`/article/${item.id}`} key={item.id}>
           <p>{item.title}</p>
           <img src={item.cover} alt="" />
           <p>{item.summary}</p>
-        </div>
+        </NavLink>
       })}
     </div>
   );

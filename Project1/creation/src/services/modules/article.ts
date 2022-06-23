@@ -1,7 +1,7 @@
 import { request } from 'umi';
 
 // 获取文章列表
-export function getArticleList(page: number = 1){
+export function getArticleList(page: number = 1) {
   return request('/api/article', {
     // params是url的一部分，拼接在path后面
     params: {
@@ -13,6 +13,13 @@ export function getArticleList(page: number = 1){
 }
 
 // 获取文章推荐列表
-export function getArticleRecommend(){
+export function getArticleRecommend() {
   return request('/api/article/recommend')
+}
+
+// 获取文章详情
+export function getArticleDetail(id: string) {
+  return request(`/api/article/${id}/views`, {
+    method: 'POST'
+  })
 }

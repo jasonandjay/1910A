@@ -1,6 +1,8 @@
 import { createLogger } from 'redux-logger';
 import { message } from 'antd';
 import { RequestConfig } from 'umi';
+// 引入全局viewer css
+import 'viewerjs/dist/viewer.css';
 
 export const dva = {
   config: {
